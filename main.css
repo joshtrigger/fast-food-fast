@@ -1,0 +1,188 @@
+h1{
+    text-align: center;
+    color: darkgray;
+    font-size: 24pt;
+    font-style: italic;
+}
+
+h2{
+    color: aliceblue;
+}
+h3{
+    color: aliceblue;
+    
+}
+
+body{
+    background-color: gainsboro;
+    background: url(image/cutlery.jpg);
+    background-repeat: repeat;
+    background-size: 100%;
+}
+
+ol{
+    background: darkgray;
+    padding: 20px;
+}
+
+.order_section{
+    color: antiquewhite;
+}
+
+input[type=text], input[type=email]{
+    width: 30%;
+    padding: 12px 15px;
+    border: 3px solid grey;
+    border-radius: 8px;
+}
+input[type=submit], input[type=button]{
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 4px;
+}
+
+.home_image{
+    margin-left: 25%;
+}
+
+.adminhome_image{
+    padding-top: 5%;
+    margin-left: 27%;
+}
+
+.order_image{
+    margin-left: 40%
+}
+
+.section{
+    text-align: center;
+    padding-top: 10px;
+}
+
+/*#admin_buttons{
+    align-content: left;
+    padding-top: 1%;
+    padding-left: 60%; 
+}*/
+
+#items{
+    padding-top: 2%;
+}
+
+#adminhome_buttons{
+    text-align: center;
+    margin-bottom: 1%;
+    /*padding-top: 25%;
+    padding-left: 50%; */
+}
+
+.ordered_items{
+    align-content: left;
+}
+
+#accept, #add{
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 12px;
+}
+
+#decline, #delete{
+    background-color: rgb(255, 0, 0); /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 12px;
+}
+#approval{
+    background-color: white; /* Green */
+    border: none;
+    color: black;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 12px;
+    padding: 14px 80px;
+}
+#approval {
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
+
+#approval:hover {
+    background-color: #4CAF50; /* Green */
+    color: white;
+}
+
+#customer_orders, #food_items{
+    background-color: tan; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 12px;
+    width: 50%;
+
+}
+
+#new_order{
+    background-color: tan; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 12px;
+}
+
+#wait{
+    background-color: orange; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 12px;
+}
+
+.order_history{
+    text-align: center;
+    padding-top: 1%;
+}
+
+#edit{
+    background-color: tan; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 12px;
+}
