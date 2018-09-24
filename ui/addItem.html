@@ -11,13 +11,13 @@
     <form action="items.html">
             <div class="section">
                 <h3>Name</h3>
-                <input type="text" name="item_name" required><br>
+                <input type="text" name="item_name" pattern=".*[^ ].*" required><br>
                 <h3>Category:</h3>
-                <input type="text" name="category" required><br>
+                <input type="text" name="category" pattern=".*[^ ].*" required><br>
                 <h3>Description:</h3>
-                <input type="text" name="description" required><br>
+                <input type="text" name="description" pattern=".*[^ ].*" required><br>
                 <h3>Price:</h3>
-                <input type="text" name="price" required><br><br>
+                <input type="number" name="price" pattern=".*[^ ].*" required><br><br>
     
                 <input type="submit" value="SUBMIT" >
             </div>

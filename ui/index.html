@@ -12,9 +12,9 @@
     <img src="image/fastfood.jpg" width="700" height="400"alt="" class="home_image">
     <div class="section">
         <form action="order.html" id="home">
-            <input type="text" name="username" placeholder="Username / Email Address" required>
+            <input type="text" name="username" placeholder="Username / Email Address" pattern=".*[^ ].*" required>
             <br><br>
-            <input type="text" name="password" placeholder="Password" required>
+            <input type="text" name="password" placeholder="Password" pattern=".*[^ ].*" required>
             <br><br>
             <input  type="submit" value="Signin as client"> 
         </form>
