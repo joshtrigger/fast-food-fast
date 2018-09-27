@@ -5,22 +5,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>FAST FOODS FAST</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-    <script src="main.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="css/main.css" />
 </head>
-<body>
+<body >
     <h1 style="font-family:'Courier New', Courier, monospace",>FAST FOOD FAST</h1>
     <img src="image/fastfood.jpg" width="700" height="400"alt="" class="home_image">
     <div class="section">
-	
-        <form action="adminhome.html">
-            <input type="text" name="username" placeholder="Username">
+        <form action="order.html" id="home">
+            <input type="text" name="username" placeholder="Username / Email Address" pattern=".*[^ ].*" required>
             <br><br>
-            <input type="email" name="email" placeholder="Email">
+            <input type="text" name="password" placeholder="Password" pattern=".*[^ ].*" required>
             <br><br>
-            <input type="submit" value="SIGN IN">
+            <input  type="submit" value="Signin as client"> 
         </form>
-
+        <form action="adminlogin.html"> <input type="submit" value="Signin as Admin"></form>
+        
         <a href="signup.html"> Create new account here</a>
     </div>
    
