@@ -1,5 +1,5 @@
 a{
-    color: cornflowerblue;
+    color: rgb(86, 140, 241);
     font-size: 18pt;
 }
 h1{
@@ -19,7 +19,7 @@ h3{
 
 body{
     background-color: gainsboro;
-    background-image: url("../image/cutlery.jpg");
+    background-image: url("../image/table.jpg");
     background-repeat: repeat;
     background-size: 100%;
 }

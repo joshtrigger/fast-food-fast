@@ -9,23 +9,29 @@
 </head>
 <body >
     <h1 style="font-family:'Courier New', Courier, monospace",>FAST FOOD FAST</h1>
-    <img src="image/fastfood.jpg" width="700" height="400"alt="" class="home_image">
+    <img src="image/logo.jpg" width="700" height="400"alt="" class="home_image">
     <div class="section">
-        <form action="order.html" id="home">
+        <form onsubmit="return submission()" id="home">
             <input type="text" id="username" placeholder="Username" pattern=".*[^ ].*" required>
             <br><br>
             <input type="text" id="password" placeholder="Password" pattern=".*[^ ].*" required>
             <br><br>
-            <input  type="submit" value="Signin as client"> 
-        </form>
-        <form action="adminlogin.html">
-            <input type="submit" value="Signin as Admin">
+            <input  type="submit" value="SignIn"> 
         </form>
         
         <a href="signup.html"> Create new account here</a>
     </div>
 
     <script>
+        function submission(){
+            if (document.getElementById('username').value == 'admin' &&
+            document.getElementById('password').value == 'mynameisadmin'){
+                location = 'adminhome.html'
+            }else{
+                location = 'order.html'
+            }
+        }
+
         document.getElementById('home').addEventListener
         ('submit', login)
 
