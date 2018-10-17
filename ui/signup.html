@@ -8,16 +8,17 @@
     <link rel="stylesheet" type="text/css" media="screen" href="css/main.css" />
 </head>
 <body>
-    <form action="customer_index.html">
+    <form onsubmit="return submission()" id="signup">
         <div class="section">
             <h3>NAME</h3>
-            <input type="text" name="username" pattern=".*[^ ].*" required><br>
+            <input type="text" id="username" pattern=".*[^ ].*" required><br>
             <h3>EMAIL:</h3>
-            <input type="email" name="email" pattern=".*[^ ].*" required><br>
+            <input type="email" id="email" pattern=".*[^ ].*" required><br>
             <h3>PASSWORD:</h3>
-            <input type="text" name="Password" pattern=".*[^ ].*" required><br>
-            <h3>CONFIRM PASSWORD:</h3>
-            <input type="text" name="Password" pattern=".*[^ ].*" required><br><br>
+            <input type="text" id="password" pattern=".*[^ ].*" required><br>
+            <!-- <h3>CONFIRM PASSWORD:</h3>
+            <input type="text" id="confirm_password" pattern=".*[^ ].*" required><br>
+            <span id="message"></span><br> -->
 
             <input type="submit" value="SUBMIT" >
         </div>
@@ -25,7 +26,48 @@
     </form>
 
     <script>
-        
+        /*var check = function(){
+            if (document.getElementById('password').value == '' &&
+            document.getElementById('confirm_password').value == '') {
+                document.getElementById('message').innerHTML = '';
+            }else if(document.getElementById('password').value ==
+            document.getElementById('confirm_password').value){
+                document.getElementById('message').style.color = 'green';
+                document.getElementById('message').style.fontSize = '25px';
+                document.getElementById('message').innerHTML = 'Password matches';
+            }else {
+                document.getElementById('message').style.color = 'red';
+                document.getElementById('message').style.fontSize = '25px';
+                document.getElementById('message').innerHTML = 'Passwords donot match';
+            }
+        }
+
+        check()*/
+
+        function submission(){
+            location = 'customer_index.html'
+        }
+
+        document.getElementById('signup').addEventListener
+        ('submit', signUp)
+
+        function signUp(e){
+            e.preventDefault();
+
+            let username = document.getElementById('username').value;
+            let email = document.getElementById('email').value;
+            let password = document.getElementById('password').value;
+            
+            fetch('http://127.0.0.1:5000/api/v1/auth/signup', {
+                method:'POST',
+                headers:{
+                    'Content-type':'application/json'
+                },
+                body:JSON.stringify({username:username, email:email, password:password})
+            })
+            .then((response) => response.json())
+            .then((data) => console.log(data));
+        }
     </script>
 </body>
 </html>
