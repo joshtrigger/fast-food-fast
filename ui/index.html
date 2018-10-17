@@ -12,9 +12,9 @@
     <img src="image/fastfood.jpg" width="700" height="400"alt="" class="home_image">
     <div class="section">
         <form action="order.html" id="home">
-            <input type="text" name="username" placeholder="Username" pattern=".*[^ ].*" required>
+            <input type="text" id="username" placeholder="Username" pattern=".*[^ ].*" required>
             <br><br>
-            <input type="text" name="password" placeholder="Password" pattern=".*[^ ].*" required>
+            <input type="text" id="password" placeholder="Password" pattern=".*[^ ].*" required>
             <br><br>
             <input  type="submit" value="Signin as client"> 
         </form>
@@ -32,9 +32,9 @@
         function login(e){
             e.preventDefault();
 
-            let username = document.getElementsByName('username').values;
-            let password = document.getElementsByName('password').values;
-
+            let username = document.getElementById('username').value;
+            let password = document.getElementById('password').value;
+            
             fetch('http://127.0.0.1:5000/api/v1/auth/login', {
                 method:'POST',
                 headers:{
