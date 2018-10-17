@@ -12,7 +12,7 @@
     <img src="image/fastfood.jpg" width="700" height="400"alt="" class="home_image">
     <div class="section">
         <form action="order.html" id="home">
-            <input type="text" name="username" placeholder="Username / Email Address" pattern=".*[^ ].*" required>
+            <input type="text" name="username" placeholder="Username" pattern=".*[^ ].*" required>
             <br><br>
             <input type="text" name="password" placeholder="Password" pattern=".*[^ ].*" required>
             <br><br>
@@ -26,7 +26,25 @@
     </div>
 
     <script>
-        
+        document.getElementById('home').addEventListener
+        ('submit', login)
+
+        function login(e){
+            e.preventDefault();
+
+            let username = document.getElementsByName('username').values;
+            let password = document.getElementsByName('password').values;
+
+            fetch('http://127.0.0.1:5000/api/v1/auth/login', {
+                method:'POST',
+                headers:{
+                    'Content-type':'application/json'
+                },
+                body:JSON.stringify({username:username, password:password})
+            })
+            .then((response) => response.json())
+            .then((data) => console.log(data));
+        }
     </script>
 </body>
 </html>
