@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" media="screen" href="css/main.css" />
 </head>
 <body>
-    <form onsubmit="return submission()" oninput="return check()" id="signup">
+<form  onsubmit="return submission()" oninput="return check()" id="signup">
         <div class="section">
             <h3>NAME</h3>
             <input type="text" id="username" pattern=".*[^ ].*" required><br>
@@ -34,7 +34,7 @@
             document.getElementById('confirm_password').value){
                 document.getElementById('message').style.color = 'green';
                 document.getElementById('message').style.fontSize = '20px';
-                document.getElementById('message').innerHTML = 'Password matches';
+                document.getElementById('message').innerHTML = 'Passwords match';
             }else {
                 document.getElementById('message').style.color = 'red';
                 document.getElementById('message').style.fontSize = '20px';
@@ -54,14 +54,18 @@
 
             let username = document.getElementById('username').value;
             let email = document.getElementById('email').value;
-            let password = document.getElementById('password').value;
+            let confirmed_password = document.getElementById('confirm_password').value;
             
             fetch('http://127.0.0.1:5000/api/v1/auth/signup', {
                 method:'POST',
                 headers:{
                     'Content-type':'application/json'
                 },
-                body:JSON.stringify({username:username, email:email, password:password})
+                body:JSON.stringify({
+                    username:username,
+                    email:email, 
+                    password:confirmed_password
+                })
             })
             .then((response) => response.json())
             .then((data) => console.log(data));
