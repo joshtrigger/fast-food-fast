@@ -84,6 +84,8 @@
                     document.getElementById('email_msg').style.fontSize = '20px';
                     document.getElementById('email_msg').innerHTML =
                     data.message;
+                }else if(data.message == 'User created successfully'){
+                    location = 'customer_index.html'
                 }
             });
         }
