@@ -12,17 +12,15 @@
     <div id="_menu">
        <button id="getMenu">VIEW THE MENU</button>
     </div>
-    <form onsubmit="return submission()">
-        <input id="makeOrder" type="submit" value="MAKE ORDER">
+    <form id="makeOrder">
+        <input type="submit" value="MAKE ORDER">
     </form>
 </body>
 <script>
-    function submission(){
-        location = 'orderhistory.html'
-    }
-
     document.getElementById('getMenu').addEventListener
     ('click', getMenu)
+    document.getElementById('makeOrder').addEventListener
+    ('submit', placeOrder)
 
     function getMenu(){
         fetch('http://127.0.0.1:5000/api/v1/menu', {
@@ -34,20 +32,40 @@
         .then((response) => response.json())
         .then((data) =>{
             let output = '<h2>MENU</h2>';
+            if (data.message == 'Menu is unavailable'){
+                document.getElementById('_menu').innerHTML =
+                data.message;
+            }
             data.forEach(function(item){
                 output += `
                     <form>
                         <fieldset>
-                            <input type="checkbox">Name: ${item.name}<br>
+                            <input type="checkbox" id="${item.foodId}">Name: ${item.name}<br>
                             Description: ${item.description}<br>
                             Price: ${item.price}<br>
                         </fieldset><br>
                     </form>
-                `;
+                `
+                ;
             });
             document.getElementById('_menu').innerHTML =
             output;
+        })   
+    }
+
+    function placeOrder(e){
+        e.preventDefault();
+
+        fetch('http://127.0.0.1:5000/api/v1/orders', {
+            method:'POST',
+            headers:{
+                'Authorization':localStorage.getItem('token'),
+                'Content-Type':'application/json'
+            },
+            body:{}
         })
+        .then((response) => response.json())
+        .then((data) => console.log(data));
     }
 </script>
 </html>
