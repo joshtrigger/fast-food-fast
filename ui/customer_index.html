@@ -38,7 +38,6 @@
             })
             .then((response) => response.json())
             .then((data) => {
-                localStorage.setItem('token', 'Bearer ' + data.token)
                 if(data.message == 'Please Create an account'){
                     document.getElementById('message').style.color = 'red';
                     document.getElementById('message').style.fontSize = '20px';
@@ -51,6 +50,7 @@
                     document.getElementById('message').innerHTML =
                     data.message;
                 }else if(data.message == 'You are successfully logged in'){
+                    localStorage.setItem('token', 'Bearer ' + data.token)
                     location = 'order.html';
                 }
             });
