@@ -29,7 +29,7 @@ ol{
     padding: 20px;
 }
 
-.order_section{
+#_menu{
     color: antiquewhite;
 }
 
@@ -91,7 +91,7 @@ input[type=submit], input[type=button]{
     align-content: left;
 }
 
-#accept, #add{
+#accept, #add, #getMenu{
     background-color: #4CAF50; /* Green */
     border: none;
     color: white;

@@ -9,59 +9,45 @@
 </head>
 <body>
     <h1>MAKE YOUR ORDER HERE</h1>
-   <div class="order_section">
-        <form action="orderhistory.html">
-                <fieldset id="breakfast">
-                    <legend>BREAKFAST</legend>
-                        <input type="checkbox" name="order" value="">Black Tea <br>
-                        <input type="checkbox" name="order" value="">Milk Tea <br>
-                        <input type="checkbox" name="order" value="">Green Tea <br>
-                        <input type="checkbox" name="order" value="">Coffee <br><br>
-                </fieldset><br>
-        
-                <fieldset id="lunch">
-                        <legend>LUNCH</legend>
-                            <input type="checkbox" name="order" value="">Pilau <br>
-                            <input type="checkbox" name="order" value="">Posho + Beans <br>
-                            <input type="checkbox" name="order" value="">Matooke + G-nut Stew <br>
-                            <input type="checkbox" name="order" value="">Rice + Chicken <br><br>
-                </fieldset><br>
-        
-                <fieldset id="diner">
-                        <legend>DINER</legend>
-                            <input type="checkbox" name="order" value="">Rolex <br>
-                            <input type="checkbox" name="order" value="">Pizza <br>
-                            <input type="checkbox" name="order" value="">Tea <br>
-                            <input type="checkbox" name="order" value="">Water <br><br>
-                </fieldset><br>
-        
-                <fieldset id="drinks">
-                        <legend>DRINKS</legend>
-                            <input type="checkbox" name="order" value="">Sodas <br>
-                            <input type="checkbox" name="order" value="">Water <br>
-                            <input type="checkbox" name="order" value="">Soft drinks <br>
-                            <input type="checkbox" name="order" value="">Hard drinks <br><br>
-                </fieldset><br>
-        
-                <fieldset id="desert">
-                        <legend>DESERT</legend>
-                            <input type="checkbox" name="order" value="">Rolex <br>
-                            <input type="checkbox" name="order" value="">Pizza <br>
-                            <input type="checkbox" name="order" value="">Tea <br>
-                            <input type="checkbox" name="order" value="">Water <br><br>
-                </fieldset><br>
-        
-                <fieldset id="snacks">
-                        <legend>SNAKCS</legend>
-                            <input type="checkbox" name="order" value="">Rolex <br>
-                            <input type="checkbox" name="order" value="">Pizza <br>
-                            <input type="checkbox" name="order" value="">Tea <br>
-                            <input type="checkbox" name="order" value="">Water <br><br>
-                </fieldset><br>
-        
-               
-                <input type="submit" value="MAKE ORDER">
-        </form>
-   </div>
+    <div id="_menu">
+       <button id="getMenu">VIEW THE MENU</button>
+    </div>
+    <form onsubmit="return submission()">
+        <input id="makeOrder" type="submit" value="MAKE ORDER">
+    </form>
 </body>
+<script>
+    function submission(){
+        location = 'orderhistory.html'
+    }
+
+    document.getElementById('getMenu').addEventListener
+    ('click', getMenu)
+
+    function getMenu(){
+        fetch('http://127.0.0.1:5000/api/v1/menu', {
+            headers:{
+                'Authorization':localStorage.getItem('token'),
+                'Content-Type':'application/json'
+            }
+        })
+        .then((response) => response.json())
+        .then((data) =>{
+            let output = '<h2>MENU</h2>';
+            data.forEach(function(item){
+                output += `
+                    <form>
+                        <fieldset>
+                            <input type="checkbox">Name: ${item.name}<br>
+                            Description: ${item.description}<br>
+                            Price: ${item.price}<br>
+                        </fieldset><br>
+                    </form>
+                `;
+            });
+            document.getElementById('_menu').innerHTML =
+            output;
+        })
+    }
+</script>
 </html>

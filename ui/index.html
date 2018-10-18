@@ -11,27 +11,20 @@
     <h1 style="font-family:'Courier New', Courier, monospace",>FAST FOOD FAST</h1>
     <img src="image/logo.jpg" width="700" height="400"alt="" class="home_image">
     <div class="section">
-        <form onsubmit="return submission()" id="home">
+        <form onsubmit="return login()" id="home">
             <input type="text" id="username" placeholder="Username" pattern=".*[^ ].*" required>
             <br><br>
             <input type="text" id="password" placeholder="Password" pattern=".*[^ ].*" required>
-            <br><br>
-            <input  type="submit" value="SignIn"> 
+            <br>
+            <span id="message"></span><br><br>
+            <input  type="submit" value="SignIn">
+             
         </form>
         
         <a href="signup.html"> Create new account here</a>
     </div>
 
     <script>
-        function submission(){
-            if (document.getElementById('username').value == 'admin' &&
-            document.getElementById('password').value == 'mynameisadmin'){
-                location = 'adminhome.html'
-            }else{
-                location = 'order.html'
-            }
-        }
-
         document.getElementById('home').addEventListener
         ('submit', login)
 
@@ -49,7 +42,29 @@
                 body:JSON.stringify({username:username, password:password})
             })
             .then((response) => response.json())
-            .then((data) => console.log(data));
+            .then((data) => {
+                localStorage.setItem('token', 'Bearer ' + data.token)
+                if (data.message == 'You are successfully logged in'){
+                    window.location.href = 'order.html'
+                }else{
+                    window.location.href = 'adminhome.html'
+                }
+                // if{
+                //     document.getElementById('message').style.color = 'red';
+                //     document.getElementById('message').style.fontSize = '20px';
+                //     document.getElementById('message').innerHTML = data.message;
+                // }
+            })
+            .catch((err) => console.log(err));
+
+            // function submission(){
+            //     if (document.getElementById('username').value == 'admin' &&
+            //     document.getElementById('password').value == 'mynameisadmin'){
+            //         location = 'adminhome.html'
+            //     }else{
+            //         location = 'order.html'
+            //     }
+            // }
         }
     </script>
 </body>
