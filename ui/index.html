@@ -11,14 +11,13 @@
     <h1 style="font-family:'Courier New', Courier, monospace",>FAST FOOD FAST</h1>
     <img src="image/logo.jpg" width="700" height="400"alt="" class="home_image">
     <div class="section">
-        <form onsubmit="return login()" id="home">
+        <form id="home">
             <input type="text" id="username" placeholder="Username" pattern=".*[^ ].*" required>
             <br><br>
             <input type="text" id="password" placeholder="Password" pattern=".*[^ ].*" required>
             <br>
             <span id="message"></span><br><br>
             <input  type="submit" value="SignIn">
-             
         </form>
         
         <a href="signup.html"> Create new account here</a>
@@ -37,34 +36,29 @@
             fetch('http://127.0.0.1:5000/api/v1/auth/login', {
                 method:'POST',
                 headers:{
-                    'Content-type':'application/json'
+                    'Content-type':'application/json' 
                 },
                 body:JSON.stringify({username:username, password:password})
             })
             .then((response) => response.json())
             .then((data) => {
-                localStorage.setItem('token', 'Bearer ' + data.token)
-                if (data.message == 'You are successfully logged in'){
-                    window.location.href = 'order.html'
-                }else{
-                    window.location.href = 'adminhome.html'
-                }
-                // if{
-                //     document.getElementById('message').style.color = 'red';
-                //     document.getElementById('message').style.fontSize = '20px';
-                //     document.getElementById('message').innerHTML = data.message;
-                // }
-            })
-            .catch((err) => console.log(err));
+                if(data.message == 'welcome admin'){
+                    location = 'adminhome.html';
+                }else if(data.message == 'Please Create an account'){
+                    document.getElementById('message').style.color = 'red';
+                    document.getElementById('message').style.fontSize = '20px';
+                    document.getElementById('message').innerHTML =
+                    data.message;
 
-            // function submission(){
-            //     if (document.getElementById('username').value == 'admin' &&
-            //     document.getElementById('password').value == 'mynameisadmin'){
-            //         location = 'adminhome.html'
-            //     }else{
-            //         location = 'order.html'
-            //     }
-            // }
+                }else if(data.message == 'username or password is incorrect'){
+                    document.getElementById('message').style.color = 'red';
+                    document.getElementById('message').style.fontSize = '20px';
+                    document.getElementById('message').innerHTML =
+                    data.message;
+                }else if(data.message == 'You are successfully logged in'){
+                    location = 'order.html';
+                }
+            });
         }
     </script>
 </body>

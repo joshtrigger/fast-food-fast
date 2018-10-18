@@ -8,12 +8,14 @@
     <link rel="stylesheet" type="text/css" media="screen" href="css/main.css" />
 </head>
 <body>
-<form  onsubmit="return submission()" oninput="return check()" id="signup">
+<form  oninput="return check()" id="signup">
         <div class="section">
             <h3>NAME</h3>
             <input type="text" id="username" pattern=".*[^ ].*" required><br>
+            <span id="username_msg"></span>
             <h3>EMAIL:</h3>
             <input type="email" id="email" pattern=".*[^ ].*" required><br>
+            <span id="email_msg"></span>
             <h3>PASSWORD:</h3>
             <input type="text" id="password" pattern=".*[^ ].*" required><br>
             <h3>CONFIRM PASSWORD:</h3>
@@ -28,22 +30,20 @@
     <script>
         function check(){
             if (document.getElementById('password').value == '' &&
-            document.getElementById('confirm_password').value == '') {
+                document.getElementById('confirm_password').value == '') {
                 document.getElementById('message').innerHTML = '';
             }else if(document.getElementById('password').value ==
             document.getElementById('confirm_password').value){
                 document.getElementById('message').style.color = 'green';
                 document.getElementById('message').style.fontSize = '20px';
-                document.getElementById('message').innerHTML = 'Passwords match';
+                document.getElementById('message').innerHTML =
+                'Passwords match';
             }else {
                 document.getElementById('message').style.color = 'red';
                 document.getElementById('message').style.fontSize = '20px';
-                document.getElementById('message').innerHTML = 'Passwords donot match';
+                document.getElementById('message').innerHTML =
+                'Passwords donot match';
             }
-        }
-
-        function submission(){
-            location = 'customer_index.html'
         }
 
         document.getElementById('signup').addEventListener
@@ -68,7 +68,24 @@
                 })
             })
             .then((response) => response.json())
-            .then((data) => console.log(data));
+            .then((data) => {
+                if(data.message == 'username cannot have special characters'){
+                    document.getElementById('username_msg').style.color = 'red';
+                    document.getElementById('username_msg').style.fontSize = '20px';
+                    document.getElementById('username_msg').innerHTML =
+                    data.message;
+                }else if(data.message == 'user already exists'){
+                    document.getElementById('username_msg').style.color = 'red';
+                    document.getElementById('username_msg').style.fontSize = '20px';
+                    document.getElementById('username_msg').innerHTML =
+                    data.message;
+                }else if(data.message == 'please use another email address'){
+                    document.getElementById('email_msg').style.color = 'red';
+                    document.getElementById('email_msg').style.fontSize = '20px';
+                    document.getElementById('email_msg').innerHTML =
+                    data.message;
+                }
+            });
         }
     </script>
 </body>
