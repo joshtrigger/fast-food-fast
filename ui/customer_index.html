@@ -8,25 +8,22 @@
         <img src="image/welcome.jpg" width="700" height="400"alt="" class="home_image">
 
         <div class="section">
-            <form onsubmit="return submission()" id="home">
-                <input type="text" name="username" placeholder="Username" pattern=".*[^ ].*" required>
+            <form id="client_home">
+                <input type="text" id="username" placeholder="Username" pattern=".*[^ ].*" required>
                 <br><br>
-                <input type="text" name="password" placeholder="Password" pattern=".*[^ ].*" required>
+                <input type="text" id="password" placeholder="Password" pattern=".*[^ ].*" required>
                 <br><br>
-                <input  type="submit" value="Submit"> 
+                <span id="message"></span><br>
+                <input  type="submit" value="Submit">
             </form>
         </div>
     </body>
 
     <script>
-        function submission(){
-            location = 'order.html'
-        }
+        document.getElementById('client_home').addEventListener
+        ('submit', clientLogin)
 
-        document.getElementById('home').addEventListener
-        ('submit', login)
-
-        function login(e){
+        function clientLogin(e){
             e.preventDefault();
 
             let username = document.getElementById('username').value;
@@ -40,7 +37,22 @@
                 body:JSON.stringify({username:username, password:password})
             })
             .then((response) => response.json())
-            .then((data) => console.log(data));
+            .then((data) => {
+                if(data.message == 'Please Create an account'){
+                    document.getElementById('message').style.color = 'red';
+                    document.getElementById('message').style.fontSize = '20px';
+                    document.getElementById('message').innerHTML =
+                    data.message;
+
+                }else if(data.message == 'username or password is incorrect'){
+                    document.getElementById('message').style.color = 'red';
+                    document.getElementById('message').style.fontSize = '20px';
+                    document.getElementById('message').innerHTML =
+                    data.message;
+                }else if(data.message == 'You are successfully logged in'){
+                    location = 'order.html';
+                }
+            });
         }
     </script>
 </html>
