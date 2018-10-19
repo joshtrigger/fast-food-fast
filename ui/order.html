@@ -13,14 +13,12 @@
        <button id="getMenu">VIEW THE MENU</button>
     </div>
     <form id="makeOrder">
-        <input type="submit" value="MAKE ORDER">
+        <input type="submit" value="View Order Cart">
     </form>
 </body>
 <script>
     document.getElementById('getMenu').addEventListener
     ('click', getMenu)
-    document.getElementById('makeOrder').addEventListener
-    ('submit', placeOrder)
 
     function getMenu(){
         fetch('http://127.0.0.1:5000/api/v1/menu', {
@@ -38,13 +36,12 @@
             }
             data.forEach(function(item){
                 output += `
-                    <form>
-                        <fieldset>
-                            <input type="checkbox" id="${item.foodId}">Name: ${item.name}<br>
-                            Description: ${item.description}<br>
-                            Price: ${item.price}<br>
-                        </fieldset><br>
-                    </form>
+                <ol>
+                    <h2>Name: ${item.name}</h2>
+                    <h3>Description: ${item.description}</h3>
+                    <h3>Price: ${item.price}</h3>
+                    <button id="${item.foodId}">Add to Cart</button>
+                </ol>
                 `
                 ;
             });
@@ -55,7 +52,7 @@
 
     function placeOrder(e){
         e.preventDefault();
-
+        
         fetch('http://127.0.0.1:5000/api/v1/orders', {
             method:'POST',
             headers:{

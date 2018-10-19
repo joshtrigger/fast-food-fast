@@ -25,7 +25,15 @@ body{
 }
 
 ol{
+    opacity: 0.9;
+    filter: alpha(opacity = 90);
+    padding: 20px;
+}
+
+ol:hover{
     background: darkgray;
+    opacity: 0.9;
+    filter: alpha(opacity = 90);
     padding: 20px;
 }
 
@@ -91,7 +99,7 @@ input[type=submit], input[type=button]{
     align-content: left;
 }
 
-#accept, #add, #getMenu{
+#accept, #add, #getMenu, #placeOrder{
     background-color: #4CAF50; /* Green */
     border: none;
     color: white;
