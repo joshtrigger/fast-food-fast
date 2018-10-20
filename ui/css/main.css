@@ -20,7 +20,8 @@ h3{
 body{
     background-color: gainsboro;
     background-image: url("../image/table.jpg");
-    background-repeat: repeat;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     background-size: 100%;
 }
 
@@ -99,7 +100,7 @@ input[type=submit], input[type=button]{
     align-content: left;
 }
 
-#accept, #add, #getMenu, #placeOrder{
+.accept, #add, #getMenu, #placeOrder, .cart{
     background-color: #4CAF50; /* Green */
     border: none;
     color: white;
@@ -111,8 +112,8 @@ input[type=submit], input[type=button]{
     border-radius: 12px;
 }
 
-#decline, #delete{
-    background-color: rgb(255, 0, 0); /* Green */
+.decline, .cancel, #delete{
+    background-color: rgb(255, 0, 0);
     border: none;
     color: white;
     padding: 15px 32px;
@@ -122,8 +123,8 @@ input[type=submit], input[type=button]{
     font-size: 16px;
     border-radius: 12px;
 }
-#approval{
-    background-color: white; /* Green */
+.approval{
+    background-color: white; 
     border: none;
     color: black;
     padding: 15px 32px;
@@ -134,18 +135,18 @@ input[type=submit], input[type=button]{
     border-radius: 12px;
     padding: 14px 80px;
 }
-#approval {
+.approval {
     -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;
 }
 
-#approval:hover {
+.approval:hover {
     background-color: #4CAF50; /* Green */
     color: white;
 }
 
 #customer_orders, #food_items{
-    background-color: tan; /* Green */
+    background-color: tan; 
     border: none;
     color: white;
     padding: 15px 32px;
@@ -158,8 +159,8 @@ input[type=submit], input[type=button]{
 
 }
 
-#new_order{
-    background-color: tan; /* Green */
+.reOrder{
+    background-color: tan;
     border: none;
     color: white;
     padding: 15px 32px;
@@ -171,7 +172,7 @@ input[type=submit], input[type=button]{
 }
 
 #wait{
-    background-color: orange; /* Green */
+    background-color: orange; 
     border: none;
     color: white;
     padding: 15px 32px;
@@ -188,7 +189,7 @@ input[type=submit], input[type=button]{
 }
 
 #edit{
-    background-color: tan; /* Green */
+    background-color: tan; 
     border: none;
     color: white;
     padding: 15px 32px;

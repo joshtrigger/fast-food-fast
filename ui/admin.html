@@ -30,21 +30,94 @@
             }
             data.forEach(function(order){
                 output += `
-                <ol>
+                <ol id="orderList">
                     <h2>Customer Name: ${order.username}</h2>
-                    <h3>State: ${order.status}</h3>
-
-                    <button id="accept">Accept</button>
-                    <button id="decline">Decline</button><br><br>
-                    <button id="approval">Mark Order</button><br>
+                    <h3>Status: ${order.status}</h3>
+                    <div id="buttons">
+                        <button class="accept" id="${order.orderId}" 
+                        onclick="accepted(${order.orderId})">
+                        Accept</button>
+                        <button class="decline" id="${order.orderId}" 
+                        onclick="declined(${order.orderId})">
+                        Decline</button><br><br>
+                        <button class="approval" id="${order.orderId}" 
+                        onclick="completed(${order.orderId})">
+                        Mark Order</button><br>
+                    </div>
                 </ol>
                 `
                 ;
             });
             document.getElementById('customerOrders').innerHTML=
             output;
-        })
+        });
     }
-    getOrders()
+    getOrders();
+
+    // function fetchedOrder(orderId){
+    //     fetch('' + orderId, {
+    //         headers:{
+    //             'Authorization':localStorage.getItem('token'),
+    //             'Content-Type':'application/json'
+    //         }
+    //     })
+    //     .then((response) => (response))
+    //     .then((data) => console.log(data));
+        
+    // }
+
+    function accepted(orderId){
+
+        fetch('http://127.0.0.1:5000/api/v1/orders/' + orderId, {
+            method:'PUT',
+            headers:{ 
+                'Authorization':localStorage.getItem('token'),
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({status:'Processing'})
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            if(data.message == 'Order status has been updated'){
+                location.reload();
+            }
+        });
+    }
+
+    function declined(orderId){
+
+        fetch('http://127.0.0.1:5000/api/v1/orders/' + orderId, {
+            method:'PUT',
+            headers:{ 
+                'Authorization':localStorage.getItem('token'),
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({status:'Declined'})
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            if(data.message == 'Order status has been updated'){
+                location.reload();
+            }
+        });
+    }
+
+    function completed(orderId){
+
+    fetch('http://127.0.0.1:5000/api/v1/orders/' + orderId, {
+        method:'PUT',
+        headers:{ 
+            'Authorization':localStorage.getItem('token'),
+            'Content-Type':'application/json'
+        },
+        body:JSON.stringify({status:'Completed'})
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            if(data.message == 'Order status has been updated'){
+                location.reload();
+            }
+        });
+    }
 </script>
 </html>
