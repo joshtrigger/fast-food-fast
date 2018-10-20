@@ -54,18 +54,6 @@
     }
     getOrders();
 
-    // function fetchedOrder(orderId){
-    //     fetch('' + orderId, {
-    //         headers:{
-    //             'Authorization':localStorage.getItem('token'),
-    //             'Content-Type':'application/json'
-    //         }
-    //     })
-    //     .then((response) => (response))
-    //     .then((data) => console.log(data));
-        
-    // }
-
     function accepted(orderId){
 
         fetch('http://127.0.0.1:5000/api/v1/orders/' + orderId, {
@@ -104,19 +92,19 @@
 
     function completed(orderId){
 
-    fetch('http://127.0.0.1:5000/api/v1/orders/' + orderId, {
-        method:'PUT',
-        headers:{ 
-            'Authorization':localStorage.getItem('token'),
-            'Content-Type':'application/json'
-        },
-        body:JSON.stringify({status:'Completed'})
-        })
-        .then((response) => response.json())
-        .then((data) => {
-            if(data.message == 'Order status has been updated'){
-                location.reload();
-            }
+        fetch('http://127.0.0.1:5000/api/v1/orders/' + orderId, {
+            method:'PUT',
+            headers:{ 
+                'Authorization':localStorage.getItem('token'),
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({status:'Completed'})
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                if(data.message == 'Order status has been updated'){
+                    location.reload();
+                }
         });
     }
 </script>
