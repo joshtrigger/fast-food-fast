@@ -59,7 +59,9 @@
             body:JSON.stringify({foodId:foodId})
         })
         .then((response) => response.json())
-        .then((data) => console.log(data));
+        .then((data) => {
+            location.reload();
+        });
     }
 </script>
 </html>
