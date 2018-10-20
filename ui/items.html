@@ -8,22 +8,46 @@
     <link rel="stylesheet" type="text/css" media="screen" href="css/main.css" />
 </head>
 <body>
-    <div class="item">
-        <ol>
-            <div id="items">
-                    <h2>Pizza</h2>
-                    <h3>Description: Beef Pizza</h3>
-                    <h3>Price: 22,000 UGX</h3>
-                    <button id="edit">Edit</button>
-                    <button id="delete">Delete</button>
-            </div>
-        </ol>
-    </div>
+    <div id="_menu"></div>
     <br><br>
 
     <form action="addItem.html">
         <button id="add">ADD ITEM</button>
     </form>
+
+    <script>
+        function getMenu(){
+                fetch('http://127.0.0.1:5000/api/v1/menu', {
+                headers:{
+                        // 'Authorization':localStorage.getItem('token'),
+                        'Content-Type':'application/json'
+                }
+                })
+                .then((response) => response.json())
+                .then((data) =>{
+                let output = '<h2>MENU</h2>';
+                if (data.message == 'Menu is unavailable'){
+                        document.getElementById('_menu').innerHTML =
+                        data.message;
+                }
+                data.forEach(function(item){
+                        output += `
+                        <ol>
+                                <h2>Name: ${item.name}</h2>
+                                <h3>Description: ${item.description}</h3>
+                                <h3>Price: ${item.price}</h3>
+                                <button id="edit">Edit</button>
+                                <button id="delete">Delete</button>
+                        </ol>
+                        `
+                        ;
+                });
+                document.getElementById('_menu').innerHTML =
+                output;
+                })   
+        }
+        getMenu()
+    </script>
 
 </body>
 </html>

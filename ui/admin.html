@@ -9,44 +9,42 @@
 </head>
 <body>
     <h2>CUSTOMER ORDERS</h2>
-    <div id="customer_order">
-       <ol>
-            <h2>African Tea</h2>
-            <h3>Made: 12-Aug-2018 at 09:22 AM</h3>
-            <h3>Customer: Joan256</h3>
-            <h3>Price: 12,500 UGX</h3>
-
-        <div id="admin_buttons">
-            <button id="accept">Accept</button>
-            <button id="decline">Decline</button><br><br>
-            <button id="approval">Mark Order</button><br>
-        </div>
-       </ol>
-
-       <ol>
-            <h2>African Tea</h2>
-            <h3>Made: 12-Aug-2018 at 09:22 AM</h3>
-            <h3>Customer: Joan256</h3>
-            <h3>Price: 12,500 UGX</h3>
-
-        <div id="admin_buttons">
-            <button id="accept">Accept</button>
-            <button id="decline">Decline</button><br><br>
-            <button id="approval">Mark Order</button><br>
-        </div>
-       </ol>
-       <ol>
-            <h2>African Tea</h2>
-            <h3>Made: 12-Aug-2018 at 09:22 AM</h3>
-            <h3>Customer: Joan256</h3>
-            <h3>Price: 12,500 UGX</h3>
-
-        <div id="admin_buttons">
-            <button id="accept">Accept</button>
-            <button id="decline">Decline</button><br><br>
-            <button id="approval">Mark Order</button><br>
-        </div>
-       </ol>
-    </div>
+    <h2 id="customerOrder"></h2>
+    <div id="customerOrders"></div>
 </body>
+
+<script>
+    function getOrders(){
+        fetch('http://127.0.0.1:5000/api/v1/orders', {
+            headers:{
+                'Authorization':localStorage.getItem('token'),
+                'Content-Type':'application/json'
+            }
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            let output = ``;
+            if(data.message == 'No orders found'){
+                document.getElementById('customerOrder').innerHTML =
+                data.message;
+            }
+            data.forEach(function(order){
+                output += `
+                <ol>
+                    <h2>Customer Name: ${order.username}</h2>
+                    <h3>State: ${order.status}</h3>
+
+                    <button id="accept">Accept</button>
+                    <button id="decline">Decline</button><br><br>
+                    <button id="approval">Mark Order</button><br>
+                </ol>
+                `
+                ;
+            });
+            document.getElementById('customerOrders').innerHTML=
+            output;
+        })
+    }
+    getOrders()
+</script>
 </html>

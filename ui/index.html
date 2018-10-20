@@ -14,7 +14,7 @@
         <form id="home">
             <input type="text" id="username" placeholder="Username" pattern=".*[^ ].*" required>
             <br><br>
-            <input type="text" id="password" placeholder="Password" pattern=".*[^ ].*" required>
+            <input type="password" id="password" placeholder="Password" pattern=".*[^ ].*" required>
             <br>
             <span id="message"></span><br><br>
             <input  type="submit" value="SignIn">
@@ -45,6 +45,7 @@
 
                 if(data.message == 'welcome admin'){
                     location = 'adminhome.html';
+                    localStorage.setItem('token', 'Bearer ' + data.token)
                 }else if(data.message == 'Please Create an account'){
                     document.getElementById('message').style.color = 'red';
                     document.getElementById('message').style.fontSize = '20px';

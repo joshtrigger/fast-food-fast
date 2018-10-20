@@ -8,35 +8,63 @@
     <link rel="stylesheet" type="text/css" media="screen" href="css/main.css" />
 </head>
 <body>
-    <img src="image/ordermade2.png" width="300" height="250" alt="ordermade" class="order_image">
-    <div class="order_history">
-        <!--<h1 class="order">ORDER MADE</h1>-->
-        <button id="wait">
-           Waiting...
-        </button><br><br>
+    <img src="image/breakfast.jpg" width="640" height="428" alt="ordermade" class="order_image">
+    <div id="order_made"></div>
 
-        <form action="order.html">
-            <Button id="new_order">Re-order</Button>
-        </form>
-    </div>
+    
     <fieldset>
-        <legend><h1>HISTORY</h1></legend>
-        <div class="history">
-            <ol>
-                
-                <h2>Chips + Liver</h2>
-                <h3>Made: 25-Aug-2018 at 12:54 PM</h3>
-                <h3>Price: 25,000 UGX</h3>
-                
-            </ol><br>
-            <ol>
-
-                <h2>African Tea</h2>
-                <h3>Made: 12-Aug-2018 at 09:22 AM</h3>
-                <h3>Price: 12,500 UGX</h3>
-                
-            </ol>
-        </div>
+        <legend><h2>Previous Orders</h2></legend>
+        <div id="orderHistory"></div>  
     </fieldset>
 </body>
+
+<script>
+    function orderHistory(){
+        fetch('http://127.0.0.1:5000/api/v1/users/orders', {
+            headers:{
+                'Authorization':localStorage.getItem('token'),
+                'Content-Type':'application/json'
+            }
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            let output = ``;
+            data.forEach(function(item){
+                output += `
+                <ol>
+                    <h2>Name: ${item.username}</h2>
+                    <h3>Order ID: ${item.orderId}</h3>
+                    <h3>Food ID: ${item.foodId}</h3>
+                    <h3>Status: ${item.status}</h3>
+
+                    <form>
+                        <Button id="${item.foodId}" onclick="placeOrder(${item.foodId})">Re Order</Button>
+                    </form>
+                </ol>
+                `
+            })
+            document.getElementById('orderHistory').innerHTML =
+            output;
+        });
+    }
+    orderHistory();
+
+    function placeOrder(foodId){
+        fetch('http://127.0.0.1:5000/api/v1/orders', {
+            method:'POST',
+            headers:{
+                'Authorization':localStorage.getItem('token'),
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({foodId:foodId})
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            if(data.message == 'Your order has been received'){
+                document.getElementById('msg').style.color = 'green';
+                document.getElementById('msg').innerHTML = data.message;
+            }
+        });
+    }
+</script>
 </html>

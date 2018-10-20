@@ -9,29 +9,26 @@
 </head>
 <body>
     <h1>MAKE YOUR ORDER HERE</h1>
-    <div id="_menu">
-       <button id="getMenu">VIEW THE MENU</button>
-    </div>
-    <form id="makeOrder">
+    <h2>MENU</h2>
+    <h2 id="_menu_"></h2>
+    <div id="_menu"></div>
+    <form id="makeOrder" action="orderhistory.html">
         <input type="submit" value="View Order Cart">
     </form>
 </body>
 <script>
-    document.getElementById('getMenu').addEventListener
-    ('click', getMenu)
-
     function getMenu(){
         fetch('http://127.0.0.1:5000/api/v1/menu', {
             headers:{
-                'Authorization':localStorage.getItem('token'),
+                // 'Authorization':localStorage.getItem('token'),
                 'Content-Type':'application/json'
             }
         })
         .then((response) => response.json())
         .then((data) =>{
-            let output = '<h2>MENU</h2>';
+            let output = ``;
             if (data.message == 'Menu is unavailable'){
-                document.getElementById('_menu').innerHTML =
+                document.getElementById('_menu_').innerHTML =
                 data.message;
             }
             data.forEach(function(item){
@@ -40,7 +37,7 @@
                     <h2>Name: ${item.name}</h2>
                     <h3>Description: ${item.description}</h3>
                     <h3>Price: ${item.price}</h3>
-                    <button id="${item.foodId}">Add to Cart</button>
+                    <button id="${item.foodId}" onclick="placeOrder(${item.foodId})">Add to Cart</button>
                 </ol>
                 `
                 ;
@@ -49,17 +46,16 @@
             output;
         })   
     }
+    getMenu()
 
-    function placeOrder(e){
-        e.preventDefault();
-        
+    function placeOrder(foodId){
         fetch('http://127.0.0.1:5000/api/v1/orders', {
             method:'POST',
             headers:{
                 'Authorization':localStorage.getItem('token'),
                 'Content-Type':'application/json'
             },
-            body:{}
+            body:JSON.stringify({foodId:foodId})
         })
         .then((response) => response.json())
         .then((data) => console.log(data));
