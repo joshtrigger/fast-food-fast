@@ -38,6 +38,42 @@ ol:hover{
     padding: 20px;
 }
 
+.split{
+    height: 100%;
+    width: 50%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    overflow: hidden;
+    padding-top: 20px;
+}
+
+.left{
+    left: 0;
+}
+
+.left:hover{
+    border: 2px solid grey;
+    overflow: scroll;
+}
+
+.lefted{
+    padding-left: 2%;
+}
+
+.right{
+    right: 0;
+}
+
+.right:hover{
+    border: 2px solid grey;
+    overflow: scroll;
+}
+
+.righted{
+    padding-left: 2%;
+}
+
 #_menu, #customerOrders{
     color: antiquewhite;
 }
@@ -78,12 +114,6 @@ input[type=submit], input[type=button]{
     text-align: center;
     padding-top: 10px;
 }
-
-/*#admin_buttons{
-    align-content: left;
-    padding-top: 1%;
-    padding-left: 60%; 
-}*/
 
 #items{
     padding-top: 2%;

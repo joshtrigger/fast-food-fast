@@ -3,19 +3,31 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta http-equiv="refresh" content="30">
+    <!-- <meta http-equiv="refresh" content="30"> -->
     <title>order</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="css/main.css" />
 </head>
 <body>
-    <h1>MAKE YOUR ORDER HERE</h1>
-    <h2>MENU</h2>
-    <h2 id="_menu_"></h2>
-    <div id="_menu"></div>
-    <form id="makeOrder" action="orderhistory.html">
-        <input type="submit" value="View Order Cart">
-    </form>
+    <div class="split left">
+        <div class="lefted">
+            <h2>MENU</h2>
+            <h2 id="_menu_"></h2>
+            <div id="_menu"></div>
+        </div>
+    </div>
+
+    <div class="split right">
+        <div class="righted">
+            <img src="image/breakfast.jpg" width="640" height="428" alt="ordermade" class="order_image">
+            <div id="order_made"></div>
+
+            <fieldset>
+                <legend><h2>Previous Orders</h2></legend>
+                <div id="orderHistory"></div>  
+            </fieldset>
+        </div>
+    </div>
 </body>
 <script>
     function getMenu(){
@@ -40,7 +52,7 @@
                     <h2>Description: ${item.description}</h2>
                     <h2>Price: ${item.price}</h2>
                     <button class="cart" id="${item.foodId}" onclick="placeOrder(${item.foodId})">
-                    Add to Cart</button>
+                    Make Order</button>
                 </ol>
                 `
                 ;
@@ -64,6 +76,72 @@
         .then((data) => {
             location.reload();
         });
+    }
+
+    function orderHistory(){
+        fetch('http://127.0.0.1:5000/api/v1/users/orders', {
+            headers:{
+                'Authorization':localStorage.getItem('token'),
+                'Content-Type':'application/json'
+            }
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            let output = ``;
+            data.forEach(function(item){
+                output += `
+                <ol>
+                    <h2>Name: ${item.username}</h2>
+                    <h2>Order ID: ${item.orderId}</h2>
+                    <h2>Food ID: ${item.foodId}</h2>
+                    <h2>Status: ${item.status}</h2>
+
+                    <form>
+                        <Button class = "reOrder" id="${item.foodId}" onclick="placeOrder(${item.foodId})">
+                        Re Order </Button>
+                        <Button class = "cancel" id="${item.orderId}" onclick="cancel(${item.orderId})">
+                        Cancel </Button>
+                    </form>
+                </ol>
+                `
+            })
+            document.getElementById('orderHistory').innerHTML =
+            output;
+        })
+        .catch((err) => (err))
+    }
+    orderHistory();
+
+    function placeOrder(foodId){
+        fetch('http://127.0.0.1:5000/api/v1/orders', {
+            method:'POST',
+            headers:{
+                'Authorization':localStorage.getItem('token'),
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({foodId:foodId})
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            if(data.message == 'Your order has been received'){
+                document.getElementById('msg').style.color = 'green';
+                document.getElementById('msg').innerHTML = data.message;
+            }
+        });
+    }
+
+    function cancel(orderId){
+
+        fetch('http://127.0.0.1:5000/api/v1/orders/' + orderId, {
+            method:'DELETE',
+            headers:{ 
+                'Authorization':localStorage.getItem('token'),
+                'Content-Type':'application/json'
+            }
+        })
+        .then((response) => response.json())
+        .then((data) => console.log(data))
+        .catch((err) => (err));
     }
 </script>
 </html>
