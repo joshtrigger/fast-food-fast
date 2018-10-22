@@ -63,21 +63,6 @@
     }
     getMenu()
 
-    function placeOrder(foodId){
-        fetch('http://127.0.0.1:5000/api/v1/orders', {
-            method:'POST',
-            headers:{
-                'Authorization':localStorage.getItem('token'),
-                'Content-Type':'application/json'
-            },
-            body:JSON.stringify({foodId:foodId})
-        })
-        .then((response) => response.json())
-        .then((data) => {
-            location.reload();
-        });
-    }
-
     function orderHistory(){
         fetch('http://127.0.0.1:5000/api/v1/users/orders', {
             headers:{
@@ -112,7 +97,7 @@
     }
     orderHistory();
 
-    function placeOrder(foodId){
+   function placeOrder(foodId){
         fetch('http://127.0.0.1:5000/api/v1/orders', {
             method:'POST',
             headers:{
@@ -123,10 +108,7 @@
         })
         .then((response) => response.json())
         .then((data) => {
-            if(data.message == 'Your order has been received'){
-                document.getElementById('msg').style.color = 'green';
-                document.getElementById('msg').innerHTML = data.message;
-            }
+            location.reload();
         });
     }
 
