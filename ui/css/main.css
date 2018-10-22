@@ -98,7 +98,11 @@ input[type=submit], input[type=button]{
 }
 
 .home_image{
-    margin-left: 25%;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -1%);
+    text-align: center;
 }
 
 .section{
