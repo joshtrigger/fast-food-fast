@@ -21,6 +21,7 @@
         <div class="righted">
             <div id="_menu">
                 <h2>MENU</h2>
+                <h2 id="_menu_"></h2>
                 </div><br><br>
                 <button id="add" onclick="openModal()">
                     ADD ITEM</button>
@@ -213,7 +214,7 @@
             .then((data) =>{
             let output = '<h2>MENU</h2>';
             if (data.message == 'Menu is unavailable'){
-                    document.getElementById('_menu').innerHTML =
+                    document.getElementById('_menu_').innerHTML =
                     data.message;
             }
             data.forEach(function(item){
