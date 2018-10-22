@@ -20,12 +20,12 @@
             <input  type="submit" value="SignIn">
         </form>
 
-        <button id="link">sign up</button>
+        <button id="link" onclick="openModal()">sign up</button>
         <!-- <a id="link"> Create new account here</a> -->
     </div>
     <div id="signupModal" class="modal">
         <div class="modal-content">
-            <span id="closeBtn">&times;</span>
+            <span id="closeBtn" onclick="closeModal()">&times;</span>
             <form  oninput="return check()" id="signup">
                 <div class="section">
                     <h3>NAME</h3>
@@ -47,10 +47,6 @@
     </div>
 
     <script>
-        document.getElementById('link').addEventListener
-        ('click', openModal)
-        document.getElementById('closeBtn').addEventListener
-        ('click', closeModal)
         document.getElementById('home').addEventListener
         ('submit', login)
 

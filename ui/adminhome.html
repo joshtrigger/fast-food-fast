@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta http-equiv="refresh" content="30">
+    <!-- <meta http-equiv="refresh" content="30"> -->
     <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="css/main.css" />
@@ -22,15 +22,77 @@
             <div id="_menu">
                 <h2>MENU</h2>
                 </div><br><br>
-                <form action="addItem.html">
-                    <button id="add">ADD ITEM</button>
-                </form>
+                <button id="add" onclick="openModal()">
+                    ADD ITEM</button>
             </div>
+        </div>
+    </div>
+    <div id="itemModal" class="modal">
+        <div class="modal-content">
+            <span id="closeBtn" onclick="closeModal()">&times;</span>
+            <form id="addItem">
+                <div class="section">
+                    <h3>Name</h3>
+                    <input type="text" id="item_name" pattern=".*[^ ].*" required><br>
+                    <h3>Description:</h3>
+                    <input type="text" id="description" pattern=".*[^ ].*" required><br>
+                    <h3>Price:</h3>
+                    <input type="text" id="price" pattern=".*[^ ].*" required><br><br>
+                    <span id="msg"></span><br><br>
+                    <input type="submit" value="SUBMIT" >
+                </div>   
+            </form>
         </div>
     </div>
 
 <script>
-function getOrders(){
+    document.getElementById('addItem').addEventListener
+    ('submit', addItem)
+
+    function openModal(){
+        document.getElementById('itemModal').style.display =
+        'block';
+    }
+
+    function closeModal(){
+        document.getElementById('itemModal').style.display =
+        'none';
+    }
+
+    function addItem(e){
+        e.preventDefault();
+
+        let itemName = document.getElementById('item_name').value;
+        let description = document.getElementById('description').value;
+        let price = document.getElementById('price').value;
+
+        fetch('http://127.0.0.1:5000/api/v1/menu', {
+            method:'POST',
+            headers:{
+                'Authorization':localStorage.getItem('token'),
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({
+                name:itemName,
+                description:description,
+                price:price
+            })
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            if(data.message == 'Item already exists'){
+                document.getElementById('msg').style.color = 'red';
+                document.getElementById('msg').style.fontSize = '20px';
+                document.getElementById('msg').innerHTML=
+                data.message;
+            }else if(data.message == 'Item successfully added'){
+                alert(data.message)
+                location = 'adminhome.html';
+            }
+        });
+    }
+
+    function getOrders(){
         fetch('http://127.0.0.1:5000/api/v1/orders', {
             headers:{
                 'Authorization':localStorage.getItem('token'),
@@ -141,36 +203,36 @@ function getOrders(){
     }
 
     function getMenu(){
-                fetch('http://127.0.0.1:5000/api/v1/menu', {
-                headers:{
-                        // 'Authorization':localStorage.getItem('token'),
-                        'Content-Type':'application/json'
-                }
-                })
-                .then((response) => response.json())
-                .then((data) =>{
-                let output = '<h2>MENU</h2>';
-                if (data.message == 'Menu is unavailable'){
-                        document.getElementById('_menu').innerHTML =
-                        data.message;
-                }
-                data.forEach(function(item){
-                        output += `
-                        <ol>
-                                <h2>Name: ${item.name}</h2>
-                                <h2>Description: ${item.description}</h2>
-                                <h2>Price: ${item.price}</h2>
-                                <button id="edit">Edit</button>
-                                <button id="delete">Delete</button>
-                        </ol>
-                        `
-                        ;
-                });
-                document.getElementById('_menu').innerHTML =
-                output;
-                })   
-        }
-        getMenu()
+        fetch('http://127.0.0.1:5000/api/v1/menu', {
+            headers:{
+                    // 'Authorization':localStorage.getItem('token'),
+                    'Content-Type':'application/json'
+            }
+            })
+            .then((response) => response.json())
+            .then((data) =>{
+            let output = '<h2>MENU</h2>';
+            if (data.message == 'Menu is unavailable'){
+                    document.getElementById('_menu').innerHTML =
+                    data.message;
+            }
+            data.forEach(function(item){
+                    output += `
+                    <ol>
+                            <h2>Name: ${item.name}</h2>
+                            <h2>Description: ${item.description}</h2>
+                            <h2>Price: ${item.price}</h2>
+                            <button id="edit">Edit</button>
+                            <button id="delete">Delete</button>
+                    </ol>
+                    `
+                    ;
+            });
+            document.getElementById('_menu').innerHTML =
+            output;
+        })   
+    }
+    getMenu()
 </script>
 </body>
 </html>
