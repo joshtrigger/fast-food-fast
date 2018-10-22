@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- <meta http-equiv="refresh" content="30"> -->
     <title>Admin</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="css/main.css" />
@@ -30,8 +31,9 @@
             }
             data.forEach(function(order){
                 output += `
-                <ol id="orderList">
+                <ol id="${order.orderId}" onclick="fetchOrder(${order.orderId})">
                     <h2>Customer Name: ${order.username}</h2>
+                    <h2>Food ID: ${order.foodId}</h2>
                     <h2>Status: ${order.status}</h2>
                     <div id="buttons">
                         <button class="accept" id="${order.orderId}" 
@@ -53,6 +55,21 @@
         });
     }
     getOrders();
+
+    function fetchOrder(orderId){
+        var url = 'http://127.0.0.1:5500/ui/';
+        var new_url = url.replace('http://127.0.0.1:5500/ui/',
+         'http://127.0.0.1:5000/api/v1/orders/');
+
+        fetch(new_url + orderId, {
+            headers:{
+                'Authorization':localStorage.getItem('token'),
+                'Content-Type':'application/json'
+            }
+        })
+        .then((response) => (response))
+        .then((data) => console.log(data));
+    }
 
     function accepted(orderId){
 
