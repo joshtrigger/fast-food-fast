@@ -101,33 +101,9 @@ input[type=submit], input[type=button]{
     margin-left: 25%;
 }
 
-.adminhome_image{
-    padding-top: 5%;
-    margin-left: 27%;
-}
-
-.order_image{
-    margin-left: 30%;
-}
-
 .section{
     text-align: center;
     padding-top: 10px;
-}
-
-#items{
-    padding-top: 2%;
-}
-
-#adminhome_buttons{
-    text-align: center;
-    margin-bottom: 1%;
-    /*padding-top: 25%;
-    padding-left: 50%; */
-}
-
-.ordered_items{
-    align-content: left;
 }
 
 .accept, #add, #getMenu, #placeOrder, .cart{
@@ -175,51 +151,13 @@ input[type=submit], input[type=button]{
     color: white;
 }
 
-#customer_orders, #food_items{
-    background-color: tan; 
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    border-radius: 12px;
-    width: 50%;
-
-}
-
-.reOrder{
-    background-color: tan;
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    border-radius: 12px;
-}
-
-#wait{
-    background-color: orange; 
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    border-radius: 12px;
-}
-
 .order_history{
     text-align: center;
     padding-top: 1%;
 }
 
-#edit{
-    background-color: tan; 
+#edit, .reOrder{
+    background-color: orange; 
     border: none;
     color: white;
     padding: 15px 32px;
