@@ -19,13 +19,113 @@
             <span id="message"></span><br><br>
             <input  type="submit" value="SignIn">
         </form>
+
+        <button id="link">sign up</button>
+        <!-- <a id="link"> Create new account here</a> -->
+    </div>
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <span id="closeBtn">&times;</span>
+            <form  oninput="return check()" id="signup">
+                <div class="section">
+                    <h3>NAME</h3>
+                    <input type="text" id="usernames" pattern=".*[^ ].*" required><br>
+                    <span id="username_msg"></span>
+                    <h3>EMAIL:</h3>
+                    <input type="email" id="email" pattern=".*[^ ].*" required><br>
+                    <span id="email_msg"></span>
+                    <h3>PASSWORD:</h3>
+                    <input type="password" id="passwords" pattern=".*[^ ].*" required><br>
+                    <h3>CONFIRM PASSWORD:</h3>
+                    <input type="password" id="confirm_password" pattern=".*[^ ].*" required><br>
+                    <span id="messages"></span><br>
         
-        <a href="signup.html"> Create new account here</a>
+                    <input type="submit" value="SUBMIT" >
+                </div>      
+            </form>
+        </div>
     </div>
 
     <script>
+        document.getElementById('link').addEventListener
+        ('click', openModal)
+        document.getElementById('closeBtn').addEventListener
+        ('click', closeModal)
         document.getElementById('home').addEventListener
         ('submit', login)
+
+        function openModal(){
+            document.getElementById('signupModal').style.display =
+            'block';
+        }
+
+        function closeModal(){
+            document.getElementById('signupModal').style.display =
+            'none';
+        }
+
+        function check(){
+            if (document.getElementById('passwords').value == '' &&
+                document.getElementById('confirm_password').value == '') {
+                document.getElementById('messages').innerHTML = '';
+            }else if(document.getElementById('passwords').value ==
+            document.getElementById('confirm_password').value){
+                document.getElementById('messages').style.color = 'green';
+                document.getElementById('messages').style.fontSize = '20px';
+                document.getElementById('messages').innerHTML =
+                'Passwords match';
+            }else {
+                document.getElementById('messages').style.color = 'red';
+                document.getElementById('messages').style.fontSize = '20px';
+                document.getElementById('messages').innerHTML =
+                'Passwords donot match';
+            }
+        }
+
+        document.getElementById('signup').addEventListener
+        ('submit', signUp)
+
+        function signUp(e){
+            e.preventDefault();
+
+            let username = document.getElementById('usernames').value;
+            let email = document.getElementById('email').value;
+            let confirmed_password = document.getElementById('confirm_password').value;
+            
+            fetch('http://127.0.0.1:5000/api/v1/auth/signup', {
+                method:'POST',
+                headers:{
+                    'Content-type':'application/json'
+                },
+                body:JSON.stringify({
+                    username:username,
+                    email:email, 
+                    password:confirmed_password
+                })
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                if(data.message == 'username cannot have special characters'){
+                    document.getElementById('username_msg').style.color = 'red';
+                    document.getElementById('username_msg').style.fontSize = '20px';
+                    document.getElementById('username_msg').innerHTML =
+                    data.message;
+                }else if(data.message == 'user already exists'){
+                    document.getElementById('username_msg').style.color = 'red';
+                    document.getElementById('username_msg').style.fontSize = '20px';
+                    document.getElementById('username_msg').innerHTML =
+                    data.message;
+                }else if(data.message == 'please use another email address'){
+                    document.getElementById('email_msg').style.color = 'red';
+                    document.getElementById('email_msg').style.fontSize = '20px';
+                    document.getElementById('email_msg').innerHTML =
+                    data.message;
+                }else if(data.message == 'User created successfully'){
+                    location = 'customer_index.html'
+                }
+            });
+        }
+
 
         function login(e){
             e.preventDefault();

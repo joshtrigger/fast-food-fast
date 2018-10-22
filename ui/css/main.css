@@ -167,3 +167,42 @@ input[type=submit], input[type=button]{
     font-size: 16px;
     border-radius: 12px;
 }
+
+.modal{
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5)
+}
+
+.modal-content{
+    background-color: darkgray;
+    opacity: 0.9;
+    /* background-image: url("../image/resta.jpg"); */
+    margin: 10% auto;
+    padding: 20px;
+    width: 50%;
+    animation-name: modalanime;
+    animation-duration: 1s;
+}
+
+#closeBtn{
+    color: white;
+    float: right;
+    font-size: 30px;
+}
+
+#closeBtn:hover{
+    color: red;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+@keyframes modalanime{
+    from{opacity: 0}
+    to{opacity: 1}
+}
