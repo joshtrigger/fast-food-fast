@@ -1,12 +1,14 @@
+*{
+    box-sizing: border-box;
+}
+
 a{
-    color: rgb(86, 140, 241);
-    font-size: 18pt;
+    color: white;
+    font-size: 18px;
 }
 h1{
-    text-align: center;
-    color: darkgray;
-    font-size: 24pt;
-    font-style: italic;
+    color: tan;
+    font-size: 26pt;
 }
 
 h2{
@@ -74,6 +76,20 @@ ol:hover{
     padding-left: 2%;
 }
 
+header{
+    background-color: #777;
+    padding: 20px;
+    text-align: left;
+    color: white;
+}
+
+footer{
+    background-color: #777;
+    padding: 5px;
+    text-align: center;
+    color: white;
+}
+
 #_menu, #customerOrders{
     color: antiquewhite;
 }
@@ -120,6 +136,7 @@ input[type=submit], input[type=button]{
     display: inline-block;
     font-size: 16px;
     border-radius: 12px;
+    cursor: pointer;
 }
 
 .decline, .cancel, #delete{
@@ -132,6 +149,7 @@ input[type=submit], input[type=button]{
     display: inline-block;
     font-size: 16px;
     border-radius: 12px;
+    cursor: pointer;
 }
 .approval{
     background-color: white; 
@@ -144,6 +162,7 @@ input[type=submit], input[type=button]{
     font-size: 16px;
     border-radius: 12px;
     padding: 14px 80px;
+    cursor: pointer;
 }
 .approval {
     -webkit-transition-duration: 0.4s; /* Safari */
@@ -160,7 +179,11 @@ input[type=submit], input[type=button]{
     padding-top: 1%;
 }
 
-#edit, .reOrder{
+#signupBtn{
+    float: right;
+}
+
+#edit, .reOrder, #signupBtn{
     background-color: orange; 
     border: none;
     color: white;
@@ -170,6 +193,7 @@ input[type=submit], input[type=button]{
     display: inline-block;
     font-size: 16px;
     border-radius: 12px;
+    cursor: pointer;
 }
 
 .modal{

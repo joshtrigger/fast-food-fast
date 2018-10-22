@@ -8,7 +8,17 @@
     <link rel="stylesheet" type="text/css" media="screen" href="css/main.css" />
 </head>
 <body >
-    <h1 style="font-family:'Courier New', Courier, monospace">FAST FOOD FAST</h1>
+    <header>
+        <h1 style="font-family:'Courier New', Courier, monospace">
+            FAST FOOD FAST</h1>
+
+        <button id="signupBtn" onclick="openModal()">sign up</button>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="">Help?</a>
+        </nav>
+    </header><br><br>
+
     <img src="image/logo.jpg" width="700" height="400"alt="" class="home_image">
     <div class="section">
         <form id="home">
@@ -17,11 +27,8 @@
             <input type="password" id="password" placeholder="Password" pattern=".*[^ ].*" required>
             <br>
             <span id="message"></span><br><br>
-            <input  type="submit" value="SignIn">
+            <input  type="submit" value="SignIn"><br><br>
         </form>
-
-        <button id="link" onclick="openModal()">sign up</button>
-        <!-- <a id="link"> Create new account here</a> -->
     </div>
     <div id="signupModal" class="modal">
         <div class="modal-content">
@@ -45,6 +52,18 @@
             </form>
         </div>
     </div>
+
+    <footer>
+        <h4>About Us</h4>
+        <h4>Fast food is an online food ordering service</h4>
+        <h5>
+            Follow Us On:
+            <a href="">Facebook</a>
+            <a href="">Twitter</a>
+            <a href="">LinkedIn</a>
+        </h5>
+        <p>copyright 2018</p>
+    </footer>
 
     <script>
         document.getElementById('home').addEventListener
