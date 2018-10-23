@@ -51,7 +51,7 @@
                     data.message;
                 }else if(data.message == 'You are successfully logged in'){
                     localStorage.setItem('token', 'Bearer ' + data.token)
-                    location = 'order.html';
+                    location = 'ui/order.html';
                 }
             });
         }

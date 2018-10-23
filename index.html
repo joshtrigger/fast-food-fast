@@ -136,7 +136,7 @@
                     document.getElementById('email_msg').innerHTML =
                     data.message;
                 }else if(data.message == 'User created successfully'){
-                    location = 'customer_index.html'
+                    location = 'ui/customer_index.html'
                 }
             });
         }
@@ -159,7 +159,7 @@
             .then((data) => {
 
                 if(data.message == 'welcome admin'){
-                    location = 'adminhome.html';
+                    location = 'ui/adminhome.html';
                     localStorage.setItem('token', 'Bearer ' + data.token)
                 }else if(data.message == 'Please Create an account'){
                     document.getElementById('message').style.color = 'red';
@@ -174,7 +174,7 @@
                     data.message;
                 }else if(data.message == 'You are successfully logged in'){
                     localStorage.setItem('token', 'Bearer ' + data.token)
-                    location = 'order.html';
+                    location = 'ui/order.html';
                 }
             });
         }
