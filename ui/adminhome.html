@@ -65,7 +65,7 @@
         let description = document.getElementById('description').value;
         let price = document.getElementById('price').value;
 
-        fetch('https://ui-fastfoods.herokuapp.com/api/v1/menu', {
+        fetch('https://my-fast-food-api.herokuapp.com/api/v1/menu', {
             method:'POST',
             headers:{
                 'Authorization':localStorage.getItem('token'),
@@ -92,7 +92,7 @@
     }
 
     function getOrders(){
-        fetch('https://ui-fastfoods.herokuapp.com/api/v1/orders', {
+        fetch('https://my-fast-food-api.herokuapp.com/api/v1/orders', {
             headers:{
                 'Authorization':localStorage.getItem('token'),
                 'Content-Type':'application/json'
@@ -135,7 +135,7 @@
     function fetchOrder(orderId){
         var url = 'http://127.0.0.1:5500/ui/';
         var new_url = url.replace('http://127.0.0.1:5500/ui/',
-         'https://ui-fastfoods.herokuapp.com/api/v1/orders/');
+         'https://my-fast-food-api.herokuapp.com/api/v1/orders/');
 
         fetch(new_url + orderId, {
             headers:{
@@ -149,7 +149,7 @@
 
     function accepted(orderId){
 
-        fetch('https://ui-fastfoods.herokuapp.com/api/v1/orders/' + orderId, {
+        fetch('https://my-fast-food-api.herokuapp.com/api/v1/orders/' + orderId, {
             method:'PUT',
             headers:{ 
                 'Authorization':localStorage.getItem('token'),
@@ -167,7 +167,7 @@
 
     function declined(orderId){
 
-        fetch('https://ui-fastfoods.herokuapp.com/api/v1/orders/' + orderId, {
+        fetch('https://my-fast-food-api.herokuapp.com/api/v1/orders/' + orderId, {
             method:'PUT',
             headers:{ 
                 'Authorization':localStorage.getItem('token'),
@@ -185,7 +185,7 @@
 
     function completed(orderId){
 
-        fetch('https://ui-fastfoods.herokuapp.com/api/v1/orders/' + orderId, {
+        fetch('https://my-fast-food-api.herokuapp.com/api/v1/orders/' + orderId, {
             method:'PUT',
             headers:{ 
                 'Authorization':localStorage.getItem('token'),
@@ -202,7 +202,7 @@
     }
 
     function getMenu(){
-        fetch('https://ui-fastfoods.herokuapp.com/api/v1/menu', {
+        fetch('https://my-fast-food-api.herokuapp.com/api/v1/menu', {
             headers:{
                     // 'Authorization':localStorage.getItem('token'),
                     'Content-Type':'application/json'
