@@ -8,6 +8,16 @@
     <link rel="stylesheet" type="text/css" media="screen" href="css/main.css" />
 </head>
 <body>
+    <header>
+            <h1 style="font-family:'Courier New', Courier, monospace">
+                FAST FOOD FAST</h1>
+    
+            <button id="logoutBtn" onclick="logOut()">Log Out</button>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="">Help?</a>
+            </nav>
+        </header><br><br>
     <div class="split left">
         <div class="lefted">
             <h2>CUSTOMER ORDERS</h2>
@@ -58,6 +68,11 @@
         'none';
     }
 
+    function logOut(){
+        localStorage.removeItem('token');
+        location = '/index.html';
+    }
+
     function addItem(e){
         e.preventDefault();
 
@@ -104,6 +119,10 @@
             if(data.message == 'No orders found'){
                 document.getElementById('customerOrder').innerHTML =
                 data.message;
+            }else if(data.message == 'Token is invalid' ||
+            data.message == 'Token is missing'){
+                alert('Please Login');
+                location = '/index.html';
             }
             data.forEach(function(order){
                 output += `

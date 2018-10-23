@@ -45,7 +45,6 @@ ol:hover{
     width: 50%;
     position: fixed;
     z-index: 1;
-    top: 0;
     overflow: hidden;
     padding-top: 20px;
 }
@@ -179,11 +178,11 @@ input[type=submit], input[type=button]{
     padding-top: 1%;
 }
 
-#signupBtn{
+#signupBtn, #logoutBtn{
     float: right;
 }
 
-#edit, .reOrder, #signupBtn{
+#edit, .reOrder, #signupBtn, #logoutBtn{
     background-color: orange; 
     border: none;
     color: white;

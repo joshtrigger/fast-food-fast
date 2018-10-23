@@ -9,6 +9,16 @@
     <link rel="stylesheet" type="text/css" media="screen" href="css/main.css" />
 </head>
 <body>
+        <header>
+            <h1 style="font-family:'Courier New', Courier, monospace">
+                FAST FOOD FAST</h1>
+    
+            <button id="logoutBtn" onclick="logOut()">Log Out</button>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="">Help?</a>
+            </nav>
+        </header><br><br>
     <div class="split left">
         <div class="lefted">
             <h2>MENU</h2>
@@ -29,8 +39,13 @@
     </div>
 </body>
 <script>
+    function logOut(){
+        localStorage.removeItem('token');
+        location = '/index.html';
+    }
+
     function getMenu(){
-        fetch('https://my-fast-food-api.herokuapp.com//api/v1/menu', {
+        fetch('https://my-fast-food-api.herokuapp.com/api/v1/menu', {
             headers:{
                 // 'Authorization':localStorage.getItem('token'),
                 'Content-Type':'application/json'
@@ -63,7 +78,7 @@
     getMenu()
 
     function orderHistory(){
-        fetch('https://my-fast-food-api.herokuapp.com//api/v1/users/orders', {
+        fetch('https://my-fast-food-api.herokuapp.com/api/v1/users/orders', {
             headers:{
                 'Authorization':localStorage.getItem('token'),
                 'Content-Type':'application/json'
@@ -72,6 +87,11 @@
         .then((response) => response.json())
         .then((data) => {
             let output = ``;
+            if(data.message == 'Token is invalid' ||
+            data.message == 'Token is missing'){
+                alert('Please Login');
+                location = '/index.html';
+            }
             data.forEach(function(item){
                 output += `
                 <ol>
@@ -97,7 +117,7 @@
     orderHistory();
 
    function placeOrder(foodId){
-        fetch('https://my-fast-food-api.herokuapp.com//api/v1/orders', {
+        fetch('https://my-fast-food-api.herokuapp.com/api/v1/orders', {
             method:'POST',
             headers:{
                 'Authorization':localStorage.getItem('token'),
@@ -113,7 +133,7 @@
 
     function cancel(orderId){
 
-        fetch('https://my-fast-food-api.herokuapp.com//api/v1/orders/' + orderId, {
+        fetch('https://my-fast-food-api.herokuapp.com/api/v1/orders/' + orderId, {
             method:'DELETE',
             headers:{ 
                 'Authorization':localStorage.getItem('token'),
