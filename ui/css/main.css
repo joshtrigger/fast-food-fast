@@ -56,7 +56,7 @@ ol:hover{
 
 .left:hover{
     border: 2px solid grey;
-    overflow: scroll;
+    overflow: auto;
 }
 
 .lefted{
@@ -69,7 +69,7 @@ ol:hover{
 
 .right:hover{
     border: 2px solid grey;
-    overflow: scroll;
+    overflow: auto;
 }
 
 .righted{
