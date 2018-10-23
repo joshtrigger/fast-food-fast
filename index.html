@@ -159,7 +159,7 @@
             .then((data) => {
 
                 if(data.message == 'welcome admin'){
-                    location = 'ui/adminhome.html';
+                    location = 'adminhome.html';
                     localStorage.setItem('token', 'Bearer ' + data.token)
                 }else if(data.message == 'Please Create an account'){
                     document.getElementById('message').style.color = 'red';
