@@ -1,12 +1,14 @@
+*{
+    box-sizing: border-box;
+}
+
 a{
-    color: cornflowerblue;
-    font-size: 18pt;
+    color: white;
+    font-size: 18px;
 }
 h1{
-    text-align: center;
-    color: darkgray;
-    font-size: 24pt;
-    font-style: italic;
+    color: tan;
+    font-size: 26pt;
 }
 
 h2{
@@ -19,21 +21,80 @@ h3{
 
 body{
     background-color: gainsboro;
-    background-image: url("../image/cutlery.jpg");
+    background-image: url("../image/table.jpg");
     background-repeat: repeat;
+    background-attachment: fixed;
     background-size: 100%;
 }
 
 ol{
-    background: darkgray;
+    opacity: 0.9;
+    filter: alpha(opacity = 90);
     padding: 20px;
 }
 
-.order_section{
+ol:hover{
+    background: darkgray;
+    opacity: 0.9;
+    filter: alpha(opacity = 90);
+    padding: 20px;
+}
+
+.split{
+    height: 100%;
+    width: 50%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    overflow: hidden;
+    padding-top: 20px;
+}
+
+.left{
+    left: 0;
+}
+
+.left:hover{
+    border: 2px solid grey;
+    overflow: auto;
+}
+
+.lefted{
+    padding-left: 2%;
+}
+
+.right{
+    right: 0;
+}
+
+.right:hover{
+    border: 2px solid grey;
+    overflow: auto;
+}
+
+.righted{
+    padding-left: 2%;
+}
+
+header{
+    background-color: #777;
+    padding: 20px;
+    text-align: left;
+    color: white;
+}
+
+footer{
+    background-color: #777;
+    padding: 5px;
+    text-align: center;
+    color: white;
+}
+
+#_menu, #customerOrders{
     color: antiquewhite;
 }
 
-input[type=text], input[type=email]{
+input[type=text], input[type=email], input[type=password]{
     width: 30%;
     padding: 12px 15px;
     border: 3px solid grey;
@@ -53,16 +114,11 @@ input[type=submit], input[type=button]{
 }
 
 .home_image{
-    margin-left: 25%;
-}
-
-.adminhome_image{
-    padding-top: 5%;
-    margin-left: 27%;
-}
-
-.order_image{
-    margin-left: 40%
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -1%);
+    text-align: center;
 }
 
 .section{
@@ -70,28 +126,7 @@ input[type=submit], input[type=button]{
     padding-top: 10px;
 }
 
-/*#admin_buttons{
-    align-content: left;
-    padding-top: 1%;
-    padding-left: 60%; 
-}*/
-
-#items{
-    padding-top: 2%;
-}
-
-#adminhome_buttons{
-    text-align: center;
-    margin-bottom: 1%;
-    /*padding-top: 25%;
-    padding-left: 50%; */
-}
-
-.ordered_items{
-    align-content: left;
-}
-
-#accept, #add{
+.accept, #add, #getMenu, #placeOrder, .cart{
     background-color: #4CAF50; /* Green */
     border: none;
     color: white;
@@ -101,10 +136,11 @@ input[type=submit], input[type=button]{
     display: inline-block;
     font-size: 16px;
     border-radius: 12px;
+    cursor: pointer;
 }
 
-#decline, #delete{
-    background-color: rgb(255, 0, 0); /* Green */
+.decline, .cancel, #delete{
+    background-color: rgb(255, 0, 0);
     border: none;
     color: white;
     padding: 15px 32px;
@@ -113,9 +149,10 @@ input[type=submit], input[type=button]{
     display: inline-block;
     font-size: 16px;
     border-radius: 12px;
+    cursor: pointer;
 }
-#approval{
-    background-color: white; /* Green */
+.approval{
+    background-color: white; 
     border: none;
     color: black;
     padding: 15px 32px;
@@ -125,53 +162,16 @@ input[type=submit], input[type=button]{
     font-size: 16px;
     border-radius: 12px;
     padding: 14px 80px;
+    cursor: pointer;
 }
-#approval {
+.approval {
     -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;
 }
 
-#approval:hover {
+.approval:hover {
     background-color: #4CAF50; /* Green */
     color: white;
-}
-
-#customer_orders, #food_items{
-    background-color: tan; /* Green */
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    border-radius: 12px;
-    width: 50%;
-
-}
-
-#new_order{
-    background-color: tan; /* Green */
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    border-radius: 12px;
-}
-
-#wait{
-    background-color: orange; /* Green */
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    border-radius: 12px;
 }
 
 .order_history{
@@ -179,8 +179,12 @@ input[type=submit], input[type=button]{
     padding-top: 1%;
 }
 
-#edit{
-    background-color: tan; /* Green */
+#signupBtn{
+    float: right;
+}
+
+#edit, .reOrder, #signupBtn{
+    background-color: orange; 
     border: none;
     color: white;
     padding: 15px 32px;
@@ -189,4 +193,44 @@ input[type=submit], input[type=button]{
     display: inline-block;
     font-size: 16px;
     border-radius: 12px;
+    cursor: pointer;
+}
+
+.modal{
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5)
+}
+
+.modal-content{
+    background-color: darkgray;
+    opacity: 0.9;
+    /* background-image: url("../image/resta.jpg"); */
+    margin: 10% auto;
+    padding: 20px;
+    width: 50%;
+    animation-name: modalanime;
+    animation-duration: 1s;
+}
+
+#closeBtn{
+    color: white;
+    float: right;
+    font-size: 30px;
+}
+
+#closeBtn:hover{
+    color: red;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+@keyframes modalanime{
+    from{opacity: 0}
+    to{opacity: 1}
 }

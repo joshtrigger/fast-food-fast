@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>FAST FOODS FAST</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="ui/css/main.css" />
+</head>
+<body >
+    <header>
+        <h1 style="font-family:'Courier New', Courier, monospace">
+            FAST FOOD FAST</h1>
+
+        <button id="signupBtn" onclick="openModal()">sign up</button>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="">Help?</a>
+        </nav>
+    </header><br><br>
+
+    <img src="ui/image/logo.jpg" width="700" height="400"alt="" class="home_image">
+    <div class="section">
+        <form id="home">
+            <input type="text" id="username" placeholder="Username" pattern=".*[^ ].*" required>
+            <br><br>
+            <input type="password" id="password" placeholder="Password" pattern=".*[^ ].*" required>
+            <br>
+            <span id="message"></span><br><br>
+            <input  type="submit" value="SignIn"><br><br>
+        </form>
+    </div>
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <span id="closeBtn" onclick="closeModal()">&times;</span>
+            <form  oninput="return check()" id="signup">
+                <div class="section">
+                    <h3>NAME</h3>
+                    <input type="text" id="usernames" pattern=".*[^ ].*" required><br>
+                    <span id="username_msg"></span>
+                    <h3>EMAIL:</h3>
+                    <input type="email" id="email" pattern=".*[^ ].*" required><br>
+                    <span id="email_msg"></span>
+                    <h3>PASSWORD:</h3>
+                    <input type="password" id="passwords" pattern=".*[^ ].*" required><br>
+                    <h3>CONFIRM PASSWORD:</h3>
+                    <input type="password" id="confirm_password" pattern=".*[^ ].*" required><br>
+                    <span id="messages"></span><br>
+        
+                    <input type="submit" value="SUBMIT" >
+                </div>      
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <h4>About Us</h4>
+        <h4>Fast food is an online food ordering service</h4>
+        <h5>
+            Follow Us On:
+            <a href="">Facebook</a>
+            <a href="">Twitter</a>
+            <a href="">LinkedIn</a>
+        </h5>
+        <p>copyright 2018</p>
+    </footer>
+
+    <script>
+        document.getElementById('home').addEventListener
+        ('submit', login)
+
+        function openModal(){
+            document.getElementById('signupModal').style.display =
+            'block';
+        }
+
+        function closeModal(){
+            document.getElementById('signupModal').style.display =
+            'none';
+        }
+
+        function check(){
+            if (document.getElementById('passwords').value == '' &&
+                document.getElementById('confirm_password').value == '') {
+                document.getElementById('messages').innerHTML = '';
+            }else if(document.getElementById('passwords').value ==
+            document.getElementById('confirm_password').value){
+                document.getElementById('messages').style.color = 'green';
+                document.getElementById('messages').style.fontSize = '20px';
+                document.getElementById('messages').innerHTML =
+                'Passwords match';
+            }else {
+                document.getElementById('messages').style.color = 'red';
+                document.getElementById('messages').style.fontSize = '20px';
+                document.getElementById('messages').innerHTML =
+                'Passwords donot match';
+            }
+        }
+
+        document.getElementById('signup').addEventListener
+        ('submit', signUp)
+
+        function signUp(e){
+            e.preventDefault();
+
+            let username = document.getElementById('usernames').value;
+            let email = document.getElementById('email').value;
+            let confirmed_password = document.getElementById('confirm_password').value;
+            
+            fetch('https://my-fast-food-api.herokuapp.com/api/v1/auth/signup', {
+                method:'POST',
+                headers:{
+                    'Content-type':'application/json'
+                },
+                body:JSON.stringify({
+                    username:username,
+                    email:email, 
+                    password:confirmed_password
+                })
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                if(data.message == 'username cannot have special characters'){
+                    document.getElementById('username_msg').style.color = 'red';
+                    document.getElementById('username_msg').style.fontSize = '20px';
+                    document.getElementById('username_msg').innerHTML =
+                    data.message;
+                }else if(data.message == 'user already exists'){
+                    document.getElementById('username_msg').style.color = 'red';
+                    document.getElementById('username_msg').style.fontSize = '20px';
+                    document.getElementById('username_msg').innerHTML =
+                    data.message;
+                }else if(data.message == 'please use another email address'){
+                    document.getElementById('email_msg').style.color = 'red';
+                    document.getElementById('email_msg').style.fontSize = '20px';
+                    document.getElementById('email_msg').innerHTML =
+                    data.message;
+                }else if(data.message == 'User created successfully'){
+                    location = 'ui/customer_index.html'
+                }
+            });
+        }
+
+
+        function login(e){
+            e.preventDefault();
+
+            let username = document.getElementById('username').value;
+            let password = document.getElementById('password').value;
+            
+            fetch('https://my-fast-food-api.herokuapp.com/api/v1/auth/login', {
+                method:'POST',
+                headers:{
+                    'Content-type':'application/json' 
+                },
+                body:JSON.stringify({username:username, password:password})
+            })
+            .then((response) => response.json())
+            .then((data) => {
+
+                if(data.message == 'welcome admin'){
+                    location = 'ui/adminhome.html';
+                    localStorage.setItem('token', 'Bearer ' + data.token)
+                }else if(data.message == 'Please Create an account'){
+                    document.getElementById('message').style.color = 'red';
+                    document.getElementById('message').style.fontSize = '20px';
+                    document.getElementById('message').innerHTML =
+                    data.message;
+
+                }else if(data.message == 'username or password is incorrect'){
+                    document.getElementById('message').style.color = 'red';
+                    document.getElementById('message').style.fontSize = '20px';
+                    document.getElementById('message').innerHTML =
+                    data.message;
+                }else if(data.message == 'You are successfully logged in'){
+                    localStorage.setItem('token', 'Bearer ' + data.token)
+                    location = 'ui/order.html';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
