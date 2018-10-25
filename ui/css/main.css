@@ -11,12 +11,8 @@ h1{
     font-size: 26pt;
 }
 
-h2{
+h2, h3{
     color: aliceblue;
-}
-h3{
-    color: aliceblue;
-    
 }
 
 body{
@@ -45,7 +41,6 @@ ol:hover{
     width: 50%;
     position: fixed;
     z-index: 1;
-    overflow: hidden;
     padding-top: 20px;
 }
 

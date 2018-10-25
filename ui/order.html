@@ -45,7 +45,7 @@
     }
 
     function getMenu(){
-        fetch('https://my-fast-food-api.herokuapp.com/api/v1/menu', {
+        fetch('http://127.0.0.1:5000/api/v1/menu', {
             headers:{
                 'Content-Type':'application/json'
             }
@@ -72,12 +72,13 @@
             });
             document.getElementById('_menu').innerHTML =
             output;
-        })   
+        })
+        .catch((err) => (err))
     }
     getMenu()
 
     function orderHistory(){
-        fetch('https://my-fast-food-api.herokuapp.com/api/v1/users/orders', {
+        fetch('http://127.0.0.1:5000/api/v1/users/orders', {
             headers:{
                 'Authorization':localStorage.getItem('token'),
                 'Content-Type':'application/json'
@@ -116,7 +117,7 @@
     orderHistory();
 
    function placeOrder(foodId){
-        fetch('https://my-fast-food-api.herokuapp.com/api/v1/orders', {
+        fetch('http://127.0.0.1:5000/api/v1/orders', {
             method:'POST',
             headers:{
                 'Authorization':localStorage.getItem('token'),
@@ -132,7 +133,7 @@
 
     function cancel(orderId){
 
-        fetch('https://my-fast-food-api.herokuapp.com/api/v1/orders/' + orderId, {
+        fetch('http://127.0.0.1:5000/api/v1/orders/' + orderId, {
             method:'DELETE',
             headers:{ 
                 'Authorization':localStorage.getItem('token'),
