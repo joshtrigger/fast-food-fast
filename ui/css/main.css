@@ -203,8 +203,11 @@ input[type=submit], input[type=button]{
 
 .modal-content{
     background-color: darkgray;
-    opacity: 0.9;
-    /* background-image: url("../image/resta.jpg"); */
+    opacity: 0.85;
+    background-image: url("../image/cutlery.jpg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-attachment: fixed;
     margin: 10% auto;
     padding: 20px;
     width: 50%;
