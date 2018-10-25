@@ -223,7 +223,6 @@
     function getMenu(){
         fetch('https://my-fast-food-api.herokuapp.com/api/v1/menu', {
             headers:{
-                    // 'Authorization':localStorage.getItem('token'),
                     'Content-Type':'application/json'
             }
             })
@@ -241,8 +240,8 @@
                             <h2>ID: ${item.foodId}</h2>
                             <h2>Description: ${item.description}</h2>
                             <h2>Price: ${item.price}</h2>
-                            <button id="edit">Edit</button>
-                            <button id="delete">Delete</button>
+                            <button id="delete" onclick="deleteItem(${item.foodId})">
+                            Delete</button>
                     </ol>
                     `
                     ;
@@ -252,6 +251,18 @@
         })   
     }
     getMenu()
+
+    function deleteItem(foodId){
+        fetch('https://my-fast-food-api.herokuapp.com/api/v1/menu/' + foodId, {
+            method:'DELETE',
+            headers:{
+                'Authorization':localStorage.getItem('token'),
+                'Content-Type':'application/json'
+            }
+        })
+        .then((response) => (response))
+        .then((data) => console.log(data));
+    }
 </script>
 </body>
 </html>

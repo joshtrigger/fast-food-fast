@@ -137,6 +137,11 @@
                     data.message;
                 }else if(data.message == 'User created successfully'){
                     location = 'ui/customer_index.html'
+                }else if(data.message == 'Field cannot be blank'){
+                    document.getElementById('username_msg').style.color = 'red';
+                    document.getElementById('username_msg').style.fontSize = '20px';
+                    document.getElementById('username_msg').innerHTML =
+                    'Username cannot have spaces';
                 }
             });
         }
